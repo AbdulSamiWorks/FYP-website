@@ -1,0 +1,344 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(31, 14.3%, 4.1%);
+  --muted: hsl(210, 4.8%, 95.9%);
+  --muted-foreground: hsl(215, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(31, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(31, 14.3%, 4.1%);
+  --border: hsl(214, 5.9%, 90%);
+  --input: hsl(214, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(210, 4.8%, 95.9%);
+  --secondary-foreground: hsl(220, 9.8%, 10%);
+  --accent: hsl(210, 4.8%, 95.9%);
+  --accent-foreground: hsl(220, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(210, 9.1%, 97.8%);
+  --ring: hsl(31, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Enhanced Medical Theme Colors */
+  --medical-primary: hsl(204, 94%, 35%);      /* Deep medical blue */
+  --medical-secondary: hsl(197, 71%, 52%);    /* Bright medical blue */
+  --medical-accent: hsl(158, 64%, 52%);       /* Medical green */
+  --medical-success: hsl(142, 76%, 36%);      /* Success green */
+  --medical-warning: hsl(32, 95%, 44%);       /* Medical amber */
+  --medical-error: hsl(0, 72%, 51%);          /* Medical red */
+  --medical-purple: hsl(262, 83%, 58%);       /* AI purple */
+  --medical-cyan: hsl(188, 94%, 43%);         /* Diagnostic cyan */
+  
+  /* Enhanced Background Colors */
+  --bg-primary: hsl(210, 17%, 98%);           /* Soft white */
+  --bg-secondary: hsl(204, 33%, 97%);         /* Subtle blue tint */
+  --bg-accent: hsl(158, 25%, 96%);            /* Light green tint */
+  --bg-gradient-start: hsl(204, 33%, 97%);
+  --bg-gradient-end: hsl(210, 17%, 98%);
+  
+  /* Text Colors */
+  --text-primary: hsl(213, 31%, 20%);         /* Dark blue-gray */
+  --text-secondary: hsl(215, 20%, 65%);       /* Medium gray */
+  --text-muted: hsl(215, 14%, 75%);          /* Light gray */
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply font-sans antialiased;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  }
+  
+  .medical-gradient {
+    background: linear-gradient(135deg, var(--medical-primary) 0%, var(--medical-secondary) 100%);
+  }
+  
+  .ai-gradient {
+    background: linear-gradient(135deg, var(--medical-purple) 0%, var(--medical-cyan) 100%);
+  }
+  
+  .medical-shadow {
+    box-shadow: 
+      0 4px 6px -1px rgba(15, 118, 183, 0.12), 
+      0 2px 4px -1px rgba(15, 118, 183, 0.08),
+      0 0 0 1px rgba(15, 118, 183, 0.05);
+  }
+  
+  .medical-shadow-lg {
+    box-shadow: 
+      0 10px 15px -3px rgba(15, 118, 183, 0.15),
+      0 4px 6px -2px rgba(15, 118, 183, 0.1),
+      0 0 0 1px rgba(15, 118, 183, 0.06);
+  }
+  
+  .medical-shadow-xl {
+    box-shadow: 
+      0 20px 25px -5px rgba(15, 118, 183, 0.18),
+      0 10px 10px -5px rgba(15, 118, 183, 0.12),
+      0 0 0 1px rgba(15, 118, 183, 0.08);
+  }
+  
+  .glow-animation {
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+  
+  .network-animation {
+    animation: networkPulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+  }
+  
+  .slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+  }
+  
+  .bounce-in {
+    animation: bounceIn 1s ease-out;
+  }
+  
+  .scale-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .scale-hover:hover {
+    transform: scale(1.02);
+    box-shadow: var(--medical-shadow-lg);
+  }
+  
+  .text-medical-primary {
+    color: var(--medical-primary);
+  }
+  
+  .text-medical-secondary {
+    color: var(--medical-secondary);
+  }
+  
+  .text-medical-accent {
+    color: var(--medical-accent);
+  }
+  
+  .text-medical-success {
+    color: var(--medical-success);
+  }
+  
+  .bg-medical-primary {
+    background-color: var(--medical-primary);
+  }
+  
+  .bg-medical-secondary {
+    background-color: var(--medical-secondary);
+  }
+  
+  .bg-medical-accent {
+    background-color: var(--medical-accent);
+  }
+  
+  .border-medical-primary {
+    border-color: var(--medical-primary);
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  .animate-fade-in-delay-1 {
+    animation: fadeIn 0.6s ease-in-out 0.2s both;
+  }
+  
+  .animate-fade-in-delay-2 {
+    animation: fadeIn 0.6s ease-in-out 0.4s both;
+  }
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(15, 118, 183, 0.3);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(15, 118, 183, 0.6), 0 0 40px rgba(15, 118, 183, 0.3);
+  }
+}
+
+@keyframes networkPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(210, 4.8%, 95.9%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(207, 90%, 54%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(224, 76%, 48%);
+}
+
+/* FL/DFL Animation enhancements */
+.fl-container {
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dfl-container {
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.connection-pulse {
+  animation: connectionPulse 2s ease-in-out infinite;
+}
+
+@keyframes connectionPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.step-indicator {
+  background: linear-gradient(135deg, var(--medical-primary), var(--medical-accent));
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(59, 110, 110, 0.3);
+  animation: stepGlow 0.5s ease-out;
+}
+
+@keyframes stepGlow {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.data-flow-animation {
+  animation: dataFlow 2s ease-in-out infinite;
+}
+
+@keyframes dataFlow {
+  0% { opacity: 0; transform: translateY(10px); }
+  50% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
