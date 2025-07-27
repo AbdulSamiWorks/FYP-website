@@ -1,31 +1,43 @@
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import { Github, Linkedin, Mail, Phone, University, FileText, Presentation } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  University,
+  FileText,
+  Presentation,
+} from "lucide-react";
 
 export default function About() {
   const teamMembers = [
     {
-      name: "Mushaf",
+      name: "Abdul Sami",
       role: "Lead Researcher",
-      specialty: "AI & Machine Learning",
+      specialty: "AI | Machine Learning | Federated Learning Specialist",
       image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
-      alt: "Mushaf - AI Research Student",
+        "https://res.cloudinary.com/dtf5nwiic/image/upload/v1752760967/sami_axhpjt.jpg",
+      alt: "Abdul Sami - AI Research Student",
+      github: "https://github.com/AbdulSamiWorks",
+      linkedin: "https://www.linkedin.com/in/abdul-sami-42904125a",
     },
     {
-      name: "Abdul Sami",
+      name: "Mushaf",
       role: "Co-Researcher",
-      specialty: "Federated Learning Specialist",
+      specialty: "AI | Machine Learning | Documentation",
       image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
-      alt: "Abdul Sami - AI Research Student",
+        "https://res.cloudinary.com/dtf5nwiic/image/upload/v1753611312/mushaf_nmpaoh.jpg",
+      alt: "Mushaf - AI Research Student",
+      github: "https://github.com/MushafUsername", // 🔁 Replace with actual GitHub
+      linkedin: "https://www.linkedin.com/in/mushaf-profile", // 🔁 Replace with actual LinkedIn
     },
   ];
 
   const impactMetrics = [
-    { value: "96.1%", label: "DFL Accuracy" },
+    { value: "99.1%", label: "DFL Accuracy" },
     { value: "35%", label: "Reduced Communication" },
-    { value: "5", label: "Disease Classes" },
+    { value: "8", label: "Disease Classes" },
     { value: "100%", label: "Data Privacy" },
   ];
 
@@ -49,23 +61,28 @@ export default function About() {
           <div className="lg:col-span-2 space-y-8">
             <Card className="medical-shadow">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-6">Project Overview</h3>
+                <h3 className="text-2xl font-semibold mb-6">
+                  Project Overview
+                </h3>
                 <div className="prose max-w-none text-gray-600 space-y-4">
                   <p>
-                    This research project represents a comprehensive comparative study between
-                    traditional Federated Learning (FL) and innovative Decentralized Federated
-                    Learning (DFL) approaches for medical image analysis, specifically focusing on
-                    ocular disease diagnosis.
+                    This research project represents a comprehensive comparative
+                    study between traditional Federated Learning (FL) and
+                    innovative Decentralized Federated Learning (DFL) approaches
+                    for medical image analysis, specifically focusing on ocular
+                    disease diagnosis.
                   </p>
                   <p>
-                    Our implementation utilizes state-of-the-art Swin Transformer architecture
-                    trained on the ODIR-5K dataset, achieving remarkable accuracy while maintaining
-                    complete patient privacy through client-side inference.
+                    Our implementation utilizes state-of-the-art Swin
+                    Transformer architecture trained on the ODIR-5K dataset,
+                    achieving remarkable accuracy while maintaining complete
+                    patient privacy through client-side inference.
                   </p>
                   <p>
-                    The system demonstrates how decentralized approaches can outperform centralized
-                    federated learning in terms of accuracy, communication efficiency, and fault
-                    tolerance, paving the way for more robust healthcare AI systems.
+                    The system demonstrates how decentralized approaches can
+                    outperform centralized federated learning in terms of
+                    accuracy, communication efficiency, and fault tolerance,
+                    paving the way for more robust healthcare AI systems.
                   </p>
                 </div>
               </CardContent>
@@ -91,12 +108,21 @@ export default function About() {
             {/* Links */}
             <Card className="medical-shadow">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-6">Project Resources</h3>
+                <h3 className="text-2xl font-semibold mb-6">
+                  Project Resources
+                </h3>
                 <div className="flex flex-wrap gap-4">
-                  <Button className="bg-gray-700 hover:bg-gray-900 text-white">
-                    <Github className="mr-2 h-4 w-4 text-white" />
-                    GitHub Repository
-                  </Button>
+                  <a
+                    href="https://github.com/AbdulSamiWorks/FYP-website"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-gray-700 hover:bg-gray-900 text-white">
+                      <Github className="mr-2 h-4 w-4 text-white" />
+                      GitHub Repository
+                    </Button>
+                  </a>
+
                   <Button className="bg-red-600 hover:bg-red-700 text-white">
                     <FileText className="mr-2 h-4 w-4 text-white" />
                     Research Paper
@@ -112,11 +138,9 @@ export default function About() {
 
           {/* Team Info */}
           <div className="space-y-8">
-            {/* Team Members */}
             <Card className="medical-shadow">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-6">Research Team</h3>
-
                 <div className="space-y-6">
                   {teamMembers.map((member, index) => (
                     <div key={index} className="text-center">
@@ -127,14 +151,29 @@ export default function About() {
                       />
                       <h4 className="text-lg font-semibold">{member.name}</h4>
                       <p className="text-gray-600">{member.role}</p>
-                      <p className="text-sm text-gray-500">{member.specialty}</p>
+                      <p className="text-sm text-gray-500">
+                        {member.specialty}
+                      </p>
                       <div className="flex justify-center space-x-3 mt-3">
-                        <Button variant="ghost" size="sm">
-                          <Linkedin className="h-4 w-4 text-blue-600" />
-                        </Button>
-                        <Button variant="ghost" size="sm">
-                          <Github className="h-4 w-4 text-gray-800" />
-                        </Button>
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button variant="ghost" size="sm">
+                            <Linkedin className="h-4 w-4 text-blue-600" />
+                          </Button>
+                        </a>
+
+                        <a
+                          href={member.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button variant="ghost" size="sm">
+                            <Github className="h-4 w-4 text-gray-800" />
+                          </Button>
+                        </a>
                       </div>
                     </div>
                   ))}
@@ -145,15 +184,28 @@ export default function About() {
             {/* University Info */}
             <Card className="medical-shadow">
               <CardContent className="p-8">
-                <h3 className="text-xl font-semibold mb-4">Academic Institution</h3>
+                <h3 className="text-xl font-semibold mb-4">
+                  Academic Institution
+                </h3>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[hsl(var(--medical-blue))] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <University className="w-8 h-8 text-white" />
+                    <University className="w-8 h-8 text-black" />
                   </div>
                   <h4 className="font-semibold">Final Year Project</h4>
-                  <p className="text-gray-600 text-sm mb-2">Computer Science Department</p>
-                  <p className="text-gray-500 text-sm">Under the supervision of:</p>
-                  <p className="font-medium">Dr. [Supervisor Name]</p>
+                  <p className="text-gray-600 text-sm mb-2">
+                    Department of Computer Science
+                  </p>
+                  <p className="text-gray-500 text-sm">Project Title:</p>
+                  <p className="font-medium text-sm mb-2">
+                    Decentralized Federated Learning for Ocular Eye Disease
+                    Diagnosis
+                  </p>
+                  <p className="text-gray-500 text-sm">
+                    Under the supervision of:
+                  </p>
+                  <p className="font-medium">
+                    Dr. Usman Khan and Ms. Fazila Malik
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -165,16 +217,17 @@ export default function About() {
                   Get In Touch
                 </h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  Interested in our research? We'd love to hear from you!
+                  Have questions about Federated or Decentralized Learning? I'm
+                  happy to connect!
                 </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center">
                     <Mail className="w-4 h-4 text-[hsl(var(--success-green))] mr-2" />
-                    <span>research@example.com</span>
+                    <span>abdulsami34421@gmail.com</span>
                   </div>
                   <div className="flex items-center">
                     <Phone className="w-4 h-4 text-[hsl(var(--success-green))] mr-2" />
-                    <span>+1 (555) 123-4567</span>
+                    <span>+92 300 1234567</span>
                   </div>
                 </div>
               </CardContent>

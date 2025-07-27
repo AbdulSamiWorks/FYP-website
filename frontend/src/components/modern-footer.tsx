@@ -1,13 +1,13 @@
 import { Link } from "wouter";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
-import { 
-  Eye, 
-  BarChart3, 
-  BookOpen, 
-  Info, 
-  Shield, 
-  Network, 
+import {
+  Eye,
+  BarChart3,
+  BookOpen,
+  Info,
+  Shield,
+  Network,
   Brain,
   Activity,
   Github,
@@ -19,7 +19,7 @@ import {
   Users,
   Database,
   Lock,
-  Zap
+  Zap,
 } from "lucide-react";
 
 export default function ModernFooter() {
@@ -41,7 +41,7 @@ export default function ModernFooter() {
   ];
 
   const stats = [
-    { label: "Accuracy Rate", value: "96.1%", icon: Award },
+    { label: "Accuracy Rate", value: "99.1%", icon: Award },
     { label: "Processing Time", value: "<3 sec", icon: Zap },
     { label: "Privacy Level", value: "100%", icon: Shield },
     { label: "Supported Conditions", value: "8", icon: Eye },
@@ -72,12 +72,11 @@ export default function ModernFooter() {
       <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
-            
             {/* Brand Section */}
             <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-medical-primary to-medical-accent rounded-xl flex items-center justify-center medical-shadow-lg">
-                  <Activity className="w-7 h-7 text-white" />
+                  <Activity className="w-7 h-7 text-blue" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-medical-primary">
@@ -88,26 +87,32 @@ export default function ModernFooter() {
                   </p>
                 </div>
               </div>
-              
+
               <p className="text-text-secondary leading-relaxed max-w-md">
-                Revolutionary AI platform providing privacy-first retinal disease diagnosis using 
-                state-of-the-art decentralized federated learning technology. Your medical data 
-                stays completely private while delivering clinical-grade accuracy.
+                Revolutionary AI platform providing privacy-first retinal
+                disease diagnosis using state-of-the-art decentralized federated
+                learning technology. Your medical data stays completely private
+                while delivering clinical-grade accuracy.
               </p>
 
               {/* Features */}
               <div className="grid grid-cols-2 gap-3">
                 {features.map((feature) => (
-                  <div key={feature.name} className="flex items-center gap-2 p-2 bg-white/60 rounded-lg">
+                  <div
+                    key={feature.name}
+                    className="flex items-center gap-2 p-2 bg-white/60 rounded-lg"
+                  >
                     <feature.icon className={`w-4 h-4 ${feature.color}`} />
-                    <span className="text-sm font-medium text-gray-700">{feature.name}</span>
+                    <span className="text-sm font-medium text-gray-700">
+                      {feature.name}
+                    </span>
                   </div>
                 ))}
               </div>
 
               {/* CTA */}
               <Link href="/diagnosis">
-                <Button className="medical-gradient hover:opacity-90 px-6 py-3 rounded-xl font-semibold medical-shadow-lg glow-animation">
+                <Button className="text-white medical-gradient hover:opacity-90 px-6 py-3 rounded-xl font-semibold medical-shadow-lg glow-animation">
                   <Eye className="w-4 h-4 mr-2" />
                   Try Free Diagnosis
                 </Button>
@@ -134,9 +139,12 @@ export default function ModernFooter() {
               </ul>
 
               <div className="mt-6 p-4 bg-gradient-to-r from-medical-primary/5 to-medical-accent/5 rounded-lg border border-medical-primary/10">
-                <h5 className="font-semibold text-medical-primary mb-2">Research Project</h5>
+                <h5 className="font-semibold text-medical-primary mb-2">
+                  Research Project
+                </h5>
                 <p className="text-sm text-text-secondary">
-                  "A Comparative Study of FL and DFL for Ocular Disease Diagnosis"
+                  "A Comparative Study of FL and DFL for Ocular Disease
+                  Diagnosis"
                 </p>
                 <Badge className="mt-2 bg-medical-accent text-white">
                   Final Year Project
@@ -150,14 +158,17 @@ export default function ModernFooter() {
                 <Info className="w-5 h-5" />
                 Project Info
               </h4>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start gap-3 p-3 bg-white/60 rounded-lg">
                   <Database className="w-5 h-5 text-medical-primary mt-0.5" />
                   <div>
-                    <div className="font-medium text-gray-800 mb-1">ODIR-5K Dataset</div>
+                    <div className="font-medium text-gray-800 mb-1">
+                      ODIR-5K Dataset
+                    </div>
                     <div className="text-sm text-text-secondary">
-                      Trained on 5,000+ retinal images for comprehensive diagnosis
+                      Trained on 5,000+ retinal images for comprehensive
+                      diagnosis
                     </div>
                   </div>
                 </div>
@@ -165,9 +176,12 @@ export default function ModernFooter() {
                 <div className="flex items-start gap-3 p-3 bg-white/60 rounded-lg">
                   <Brain className="w-5 h-5 text-medical-accent mt-0.5" />
                   <div>
-                    <div className="font-medium text-gray-800 mb-1">Swin Transformer</div>
+                    <div className="font-medium text-gray-800 mb-1">
+                      Swin Transformer
+                    </div>
                     <div className="text-sm text-text-secondary">
-                      Advanced vision transformer architecture for medical imaging
+                      Advanced vision transformer architecture for medical
+                      imaging
                     </div>
                   </div>
                 </div>
@@ -175,7 +189,9 @@ export default function ModernFooter() {
                 <div className="flex items-start gap-3 p-3 bg-white/60 rounded-lg">
                   <Lock className="w-5 h-5 text-medical-success mt-0.5" />
                   <div>
-                    <div className="font-medium text-gray-800 mb-1">Client-Side AI</div>
+                    <div className="font-medium text-gray-800 mb-1">
+                      Client-Side AI
+                    </div>
                     <div className="text-sm text-text-secondary">
                       Complete privacy with local inference using WebAssembly
                     </div>
@@ -185,7 +201,9 @@ export default function ModernFooter() {
                 <div className="flex items-start gap-3 p-3 bg-white/60 rounded-lg">
                   <Users className="w-5 h-5 text-medical-purple mt-0.5" />
                   <div>
-                    <div className="font-medium text-gray-800 mb-1">Research Team</div>
+                    <div className="font-medium text-gray-800 mb-1">
+                      Research Team
+                    </div>
                     <div className="text-sm text-text-secondary">
                       Computer Science & AI Engineering Students
                     </div>
@@ -202,12 +220,14 @@ export default function ModernFooter() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2 text-text-secondary">
-              <span>© {currentYear} DecentAI.</span>
+              <span>© {currentYear} Abdul Sami – Decentralized-AI</span>
               <span className="flex items-center gap-1">
-                Made with <Heart className="w-4 h-4 text-red-500 fill-current" /> for medical innovation
+                Made with{" "}
+                <Heart className="w-4 h-4 text-red-500 fill-current" /> for
+                ocular disease diagnosis
               </span>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <Badge className="bg-medical-success text-white">
                 Privacy First

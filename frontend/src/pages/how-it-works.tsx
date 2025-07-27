@@ -108,7 +108,7 @@ export default function HowItWorks() {
 
           {/* Decentralized FL */}
           <Card className="medical-card-hover animate-fade-in-delay-2 overflow-hidden group">
-            <div className="bg-gradient-to-br from-medical-primary to-medical-accent p-6 text-white">
+            <div className="bg-gradient-to-br from-medical-primary bg-blue-600  to-medical-accent p-6 text-white">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-2xl font-bold">Decentralized FL</h3>
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">

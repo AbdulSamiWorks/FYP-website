@@ -39,8 +39,8 @@ export default function Performance() {
   const performanceMetrics = [
     {
       title: "Model Accuracy",
-      value: "94.2%",
-      change: "+2.3%",
+      value: "99.2%",
+      change: "+8.3%",
       icon: Target,
       color: "text-medical-success",
       bgColor: "bg-medical-success/10",
@@ -87,7 +87,7 @@ export default function Performance() {
             Performance Analysis
           </h2>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-8">
-            Comprehensive evaluation of our Decentralized Federated Learning approach vs traditional methods
+            Comprehensive evaluation of our Decentralized Federated Learning approach vs Centralized Federated Learning approach
           </p>
           
           {/* Model Selection Pills */}

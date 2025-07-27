@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Eye className="h-8 w-8 text-[hsl(var(--medical-blue))]" />
+              <Eye className="h-8 w-8 text-black" />
               <span className="text-xl font-bold">EyeAI Diagnosis</span>
             </div>
             <p className="text-gray-400">

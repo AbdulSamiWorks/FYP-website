@@ -36,95 +36,95 @@ const models = [
   { id: "cnn-attention", name: "CNN-Attention" },
 ];
 
-// Chart data based on selected model
 const getModelData = (modelId: string) => {
   const baseData = {
     swin: {
-      accuracy: { centralized: 94.2, decentralized: 96.1 },
+      accuracy: { centralized: 99, decentralized: 99 },
       f1Data: [
-        { round: "Round 1", centralized: 0.85, decentralized: 0.87 },
-        { round: "Round 5", centralized: 0.88, decentralized: 0.9 },
-        { round: "Round 10", centralized: 0.91, decentralized: 0.93 },
-        { round: "Round 15", centralized: 0.93, decentralized: 0.95 },
-        { round: "Round 20", centralized: 0.941, decentralized: 0.958 },
+        { round: "Round 1", centralized: 0.85, decentralized: 0.84 },
+        { round: "Round 5", centralized: 0.88, decentralized: 0.87 },
+        { round: "Round 10", centralized: 0.91, decentralized: 0.90 },
+        { round: "Round 15", centralized: 0.93, decentralized: 0.92 },
+        { round: "Round 20", centralized: 0.94, decentralized: 0.93 },
       ],
       precisionRecall: [
-        { name: "Centralized FL", precision: 0.938, recall: 0.932 },
-        { name: "Decentralized FL", precision: 0.951, recall: 0.965 },
+        { name: "Centralized FL", precision: 0.95, recall: 0.94 },
+        { name: "Decentralized FL", precision: 0.94, recall: 0.93 },
       ],
       clientData: [
-        { client: "Client 1", centralized: 92, decentralized: 94 },
-        { client: "Client 2", centralized: 89, decentralized: 93 },
-        { client: "Client 3", centralized: 95, decentralized: 97 },
-        { client: "Client 4", centralized: 88, decentralized: 92 },
-        { client: "Client 5", centralized: 91, decentralized: 95 },
+        { client: "Client 1", centralized: 98, decentralized: 98},
+        { client: "Client 2", centralized: 97, decentralized: 96 },
+        { client: "Client 3", centralized: 99, decentralized: 98 },
+        { client: "Client 4", centralized: 96, decentralized: 95 },
+        { client: "Client 5", centralized: 98, decentralized: 97 },
       ],
     },
     mobilenet: {
-      accuracy: { centralized: 91.5, decentralized: 93.8 },
+      accuracy: { centralized: 97, decentralized: 96 },
       f1Data: [
-        { round: "Round 1", centralized: 0.82, decentralized: 0.84 },
-        { round: "Round 5", centralized: 0.85, decentralized: 0.87 },
-        { round: "Round 10", centralized: 0.88, decentralized: 0.9 },
-        { round: "Round 15", centralized: 0.9, decentralized: 0.92 },
-        { round: "Round 20", centralized: 0.915, decentralized: 0.938 },
+        { round: "Round 1", centralized: 0.80, decentralized: 0.79 },
+        { round: "Round 5", centralized: 0.83, decentralized: 0.82 },
+        { round: "Round 10", centralized: 0.86, decentralized: 0.85 },
+        { round: "Round 15", centralized: 0.89, decentralized: 0.88 },
+        { round: "Round 20", centralized: 0.91, decentralized: 0.90 },
       ],
       precisionRecall: [
-        { name: "Centralized FL", precision: 0.92, recall: 0.91 },
-        { name: "Decentralized FL", precision: 0.94, recall: 0.935 },
+        { name: "Centralized FL", precision: 0.91, recall: 0.90 },
+        { name: "Decentralized FL", precision: 0.90, recall: 0.89 },
       ],
       clientData: [
-        { client: "Client 1", centralized: 89, decentralized: 91 },
-        { client: "Client 2", centralized: 86, decentralized: 90 },
-        { client: "Client 3", centralized: 93, decentralized: 95 },
-        { client: "Client 4", centralized: 85, decentralized: 89 },
-        { client: "Client 5", centralized: 88, decentralized: 92 },
+        { client: "Client 1", centralized: 96, decentralized: 95 },
+        { client: "Client 2", centralized: 95, decentralized: 94 },
+        { client: "Client 3", centralized: 97, decentralized: 96 },
+        { client: "Client 4", centralized: 94, decentralized: 93 },
+        { client: "Client 5", centralized: 96, decentralized: 95 },
       ],
     },
     efficientnet: {
-      accuracy: { centralized: 93.1, decentralized: 95.3 },
+      accuracy: { centralized: 98, decentralized: 97 },
       f1Data: [
-        { round: "Round 1", centralized: 0.84, decentralized: 0.86 },
-        { round: "Round 5", centralized: 0.87, decentralized: 0.89 },
-        { round: "Round 10", centralized: 0.89, decentralized: 0.92 },
-        { round: "Round 15", centralized: 0.92, decentralized: 0.94 },
-        { round: "Round 20", centralized: 0.931, decentralized: 0.953 },
+        { round: "Round 1", centralized: 0.82, decentralized: 0.81 },
+        { round: "Round 5", centralized: 0.85, decentralized: 0.84 },
+        { round: "Round 10", centralized: 0.88, decentralized: 0.87 },
+        { round: "Round 15", centralized: 0.91, decentralized: 0.90 },
+        { round: "Round 20", centralized: 0.93, decentralized: 0.92 },
       ],
       precisionRecall: [
-        { name: "Centralized FL", precision: 0.93, recall: 0.925 },
-        { name: "Decentralized FL", precision: 0.948, recall: 0.955 },
+        { name: "Centralized FL", precision: 0.93, recall: 0.92 },
+        { name: "Decentralized FL", precision: 0.92, recall: 0.91 },
       ],
       clientData: [
-        { client: "Client 1", centralized: 90, decentralized: 93 },
-        { client: "Client 2", centralized: 87, decentralized: 91 },
-        { client: "Client 3", centralized: 94, decentralized: 96 },
-        { client: "Client 4", centralized: 86, decentralized: 90 },
-        { client: "Client 5", centralized: 89, decentralized: 94 },
+        { client: "Client 1", centralized: 97, decentralized: 96 },
+        { client: "Client 2", centralized: 96, decentralized: 95 },
+        { client: "Client 3", centralized: 98, decentralized: 97 },
+        { client: "Client 4", centralized: 95, decentralized: 94 },
+        { client: "Client 5", centralized: 97, decentralized: 96 },
       ],
     },
     "cnn-attention": {
-      accuracy: { centralized: 89.8, decentralized: 92.4 },
+      accuracy: { centralized: 96, decentralized: 95 },
       f1Data: [
-        { round: "Round 1", centralized: 0.8, decentralized: 0.82 },
-        { round: "Round 5", centralized: 0.83, decentralized: 0.85 },
-        { round: "Round 10", centralized: 0.86, decentralized: 0.88 },
-        { round: "Round 15", centralized: 0.88, decentralized: 0.91 },
-        { round: "Round 20", centralized: 0.898, decentralized: 0.924 },
+        { round: "Round 1", centralized: 0.78, decentralized: 0.77 },
+        { round: "Round 5", centralized: 0.81, decentralized: 0.80 },
+        { round: "Round 10", centralized: 0.84, decentralized: 0.83 },
+        { round: "Round 15", centralized: 0.87, decentralized: 0.86 },
+        { round: "Round 20", centralized: 0.89, decentralized: 0.88 },
       ],
       precisionRecall: [
-        { name: "Centralized FL", precision: 0.905, recall: 0.892 },
-        { name: "Decentralized FL", precision: 0.928, recall: 0.920 },
+        { name: "Centralized FL", precision: 0.89, recall: 0.88 },
+        { name: "Decentralized FL", precision: 0.88, recall: 0.87 },
       ],
       clientData: [
-        { client: "Client 1", centralized: 87, decentralized: 90 },
-        { client: "Client 2", centralized: 84, decentralized: 88 },
-        { client: "Client 3", centralized: 91, decentralized: 94 },
-        { client: "Client 4", centralized: 83, decentralized: 87 },
-        { client: "Client 5", centralized: 86, decentralized: 91 },
+        { client: "Client 1", centralized: 94, decentralized: 93 },
+        { client: "Client 2", centralized: 93, decentralized: 92 },
+        { client: "Client 3", centralized: 96, decentralized: 95 },
+        { client: "Client 4", centralized: 92, decentralized: 91 },
+        { client: "Client 5", centralized: 95, decentralized: 94 },
       ],
     },
   };
-  
+
+
   return baseData[modelId as keyof typeof baseData] || baseData.swin;
 };
 
@@ -360,9 +360,9 @@ export default function PerformanceCharts({
                 </tr>
                 <tr>
                   <td className="py-3 px-4 font-medium">Communication Rounds</td>
-                  <td className="py-3 px-4">150</td>
+                  <td className="py-3 px-4">30</td>
                   <td className="py-3 px-4 text-[hsl(var(--success-green))] font-semibold">
-                    98
+                    30
                   </td>
                   <td className="py-3 px-4 text-[hsl(var(--success-green))]">-34.7%</td>
                 </tr>
