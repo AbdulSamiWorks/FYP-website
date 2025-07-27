@@ -1,45 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FileUpload from "../components/file-upload";
 import DiagnosisResults from "../components/diagnosis-results";
-import { useModelInference } from "../hooks/use-pytorch-inference";
 import { generatePDFReport } from "../lib/pdf-generator";
 import { useToast } from "../hooks/use-toast";
-import { getModelStatus, initializeModel } from "../lib/pytorch-model";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-import { 
-  Brain, 
-  CheckCircle, 
-  AlertCircle, 
-  Loader2, 
-  Eye, 
-  Shield,
-  Zap,
-  Award,
-} from "lucide-react";
+import { Brain, Eye, Shield, Zap, Award } from "lucide-react";
 
 export default function Diagnosis() {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [modelStatus, setModelStatus] = useState(getModelStatus());
-  const [isInitializing, setIsInitializing] = useState(false);
-  const { isAnalyzing, result, runDiagnosis } = useModelInference();
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [result, setResult] = useState<any | null>(null);
   const { toast } = useToast();
 
-  useEffect(() => {
-    // Initialize model on component mount
-    const initModel = async () => {
-      setIsInitializing(true);
-      try {
-        await initializeModel();
-        setModelStatus(getModelStatus());
-      } catch (error) {
-        console.error('Model initialization failed:', error);
-      } finally {
-        setIsInitializing(false);
-      }
-    };
-
-    initModel();
-  }, []);
+  const BACKEND_API_URL = "https://fyp-backend-ws28.onrender.com/diagnose";
 
   const handleFileUpload = (file: File | null) => {
     setUploadedFile(file);
@@ -47,11 +20,53 @@ export default function Diagnosis() {
 
   const handleAnalyze = async () => {
     if (!uploadedFile) return;
-    
+    setIsAnalyzing(true);
+
     try {
-      await runDiagnosis(uploadedFile);
-    } catch (error) {
-      console.error("Analysis failed:", error);
+      const formData = new FormData();
+      formData.append("file", uploadedFile);
+
+      const response = await fetch(BACKEND_API_URL, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const err = await response.text();
+        throw new Error(err || "Model not responding");
+      }
+
+      const result = await response.json();
+      const markdownOutput = result.prediction ?? "⚠️ No result returned.";
+
+      const conditionMatch = markdownOutput.match(/\*\*Predicted Condition:\*\* (.+)/);
+      const confidenceMatch = markdownOutput.match(/\*\*Confidence:\*\* ([\d.]+)%/);
+
+      const condition = conditionMatch ? conditionMatch[1].trim() : "Unknown";
+      const confidence = confidenceMatch ? parseFloat(confidenceMatch[1]) / 100 : 0;
+
+      setResult({
+        primaryDiagnosis: {
+          condition,
+          confidence,
+        },
+        markdown: markdownOutput,
+        processingTime: 0,
+      });
+
+      toast({
+        title: "Diagnosis Complete ✅",
+        description: "See detailed AI results below.",
+      });
+    } catch (err: any) {
+      console.error("Error contacting backend:", err);
+      toast({
+        variant: "destructive",
+        title: "Analysis Failed ❌",
+        description: err.message || "Could not connect to the AI model.",
+      });
+    } finally {
+      setIsAnalyzing(false);
     }
   };
 
@@ -67,95 +82,45 @@ export default function Diagnosis() {
           disease: result.primaryDiagnosis.condition,
           confidence: Math.round(result.primaryDiagnosis.confidence * 100),
           accuracy: Math.round(result.primaryDiagnosis.confidence * 100),
-          processingTime: result.processingTime
+          processingTime: result.processingTime,
         },
         imageUrl: uploadedFile ? URL.createObjectURL(uploadedFile) : undefined,
       });
-      
+
       toast({
-        title: "Report Generated",
-        description: "PDF report has been downloaded successfully.",
+        title: "Report Generated ✅",
+        description: "PDF report downloaded successfully.",
       });
     } catch (error) {
       console.error("PDF generation failed:", error);
       toast({
         variant: "destructive",
-        title: "Download Failed", 
+        title: "Download Failed ❌",
         description: "Could not generate PDF report.",
       });
     }
   };
 
-  // Model status component
   const ModelStatusCard = () => (
     <Card className="medical-shadow-lg mb-8">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Brain className="w-5 h-5 text-medical-primary" />
-          AI Model Status
+          AI Model Status (Cloud)
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-medical-primary/5 to-medical-accent/5 rounded-lg">
-            {isInitializing ? (
-              <Loader2 className="w-5 h-5 text-medical-primary animate-spin" />
-            ) : modelStatus.loaded ? (
-              <CheckCircle className="w-5 h-5 text-medical-success" />
-            ) : (
-              <AlertCircle className="w-5 h-5 text-orange-500" />
-            )}
-            <div>
-              <div className="font-medium text-gray-800">
-                {isInitializing ? 'Initializing...' : modelStatus.loaded ? 'Model Loaded' : 'Using Demo Mode'}
-              </div>
-              <div className="text-sm text-text-secondary">
-                {modelStatus.type === 'pytorch' ? 'Swin Transformer (swin.pt)' : 'Mock Model'}
-              </div>
+        <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-medical-success/5 to-medical-cyan/5 rounded-lg">
+          <Shield className="w-5 h-5 text-medical-success" />
+          <div>
+            <div className="font-medium text-gray-800">
+              Running on Hugging Face Space
             </div>
-          </div>
-
-          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-medical-success/5 to-medical-cyan/5 rounded-lg">
-            <Shield className="w-5 h-5 text-medical-success" />
-            <div>
-              <div className="font-medium text-gray-800">Privacy Protected</div>
-              <div className="text-sm text-text-secondary">Client-side inference</div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-medical-cyan/5 to-medical-accent/5 rounded-lg">
-            <Zap className="w-5 h-5 text-medical-cyan" />
-            <div>
-              <div className="font-medium text-gray-800">8 Conditions</div>
-              <div className="text-sm text-text-secondary">ODIR-5K trained</div>
+            <div className="text-sm text-text-secondary">
+              Remote inference for Swin Transformer model
             </div>
           </div>
         </div>
-
-        {modelStatus.type === 'pytorch' && (
-          <div className="mt-4 p-4 bg-medical-success/10 border border-medical-success/20 rounded-lg">
-            <div className="flex items-center gap-2 text-medical-success font-medium">
-              <Award className="w-4 h-4" />
-              Real PyTorch Model Active
-            </div>
-            <p className="text-sm text-gray-700 mt-1">
-              Using your uploaded swin.pt model for authentic medical diagnosis with enhanced accuracy.
-            </p>
-          </div>
-        )}
-
-        {!modelStatus.loaded && !isInitializing && (
-          <div className="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg">
-            <div className="flex items-center gap-2 text-orange-700 font-medium">
-              <AlertCircle className="w-4 h-4" />
-              Demo Mode Active
-            </div>
-            <p className="text-sm text-gray-700 mt-1">
-              To use real AI inference, place your <code className="bg-orange-100 px-1 rounded">swin.pt</code> model file in the public directory.
-              Currently using simulated predictions for demonstration.
-            </p>
-          </div>
-        )}
       </CardContent>
     </Card>
   );
@@ -171,23 +136,28 @@ export default function Diagnosis() {
             AI-Powered Retinal Disease Diagnosis
           </h1>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-            Upload your retinal image for instant, privacy-protected analysis using our advanced 
-            Swin Transformer model trained on 8 medical conditions from the ODIR-5K dataset.
+            Upload your retinal image for instant, cloud-based analysis using
+            our advanced Swin Transformer model deployed on Hugging Face Spaces.
           </p>
-          
-          {/* Enhanced feature highlights */}
+
           <div className="flex justify-center flex-wrap gap-4 mt-8">
             <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full medical-shadow">
               <Shield className="w-4 h-4 text-medical-primary" />
-              <span className="text-sm font-medium text-medical-primary">100% Client-Side</span>
+              <span className="text-sm font-medium text-medical-primary">
+                Secure Cloud Inference
+              </span>
             </div>
             <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full medical-shadow">
               <Zap className="w-4 h-4 text-medical-accent" />
-              <span className="text-sm font-medium text-medical-accent">Real-Time Analysis</span>
+              <span className="text-sm font-medium text-medical-accent">
+                Real-Time Results
+              </span>
             </div>
             <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full medical-shadow">
               <Award className="w-4 h-4 text-medical-success" />
-              <span className="text-sm font-medium text-medical-success">Medical Grade AI</span>
+              <span className="text-sm font-medium text-medical-success">
+                Medical-Grade AI
+              </span>
             </div>
           </div>
         </div>
@@ -195,7 +165,6 @@ export default function Diagnosis() {
         <ModelStatusCard />
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Upload Section */}
           <FileUpload
             onFileUpload={handleFileUpload}
             onAnalyze={handleAnalyze}
@@ -203,14 +172,17 @@ export default function Diagnosis() {
             uploadedFile={uploadedFile}
           />
 
-          {/* Results Section */}
           <DiagnosisResults
-            result={result ? {
-              disease: result.primaryDiagnosis.condition,
-              confidence: Math.round(result.primaryDiagnosis.confidence * 100), 
-              accuracy: Math.round(result.primaryDiagnosis.confidence * 100),
-              processingTime: result.processingTime
-            } : null}
+            result={
+              result
+                ? {
+                    disease: result.primaryDiagnosis.condition,
+                    confidence: Math.round(result.primaryDiagnosis.confidence * 100),
+                    accuracy: Math.round(result.primaryDiagnosis.confidence * 100),
+                    processingTime: result.processingTime,
+                  }
+                : null
+            }
             isLoading={isAnalyzing}
             onDownloadReport={handleDownloadReport}
           />
