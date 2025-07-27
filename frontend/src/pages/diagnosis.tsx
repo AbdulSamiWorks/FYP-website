@@ -47,7 +47,7 @@ export default function Diagnosis() {
 
 
       const condition = conditionMatch ? conditionMatch[1].trim() : "Other";
-      const confidence = confidenceMatch ? parseFloat(confidenceMatch[1]) / 100 : 0;
+      const confidence = confidenceMatch ? parseFloat(confidenceMatch[1]) / 100 : 0.99;
       const advice = adviceMatch ? adviceMatch[1].trim() : "This image is not retinal please provide a retinal image for analysis.";
 
       setResult({
