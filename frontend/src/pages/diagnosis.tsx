@@ -12,7 +12,9 @@ export default function Diagnosis() {
   const [result, setResult] = useState<any | null>(null);
   const { toast } = useToast();
 
-  const BACKEND_API_URL = "https://fyp-backend-ws28.onrender.com/diagnose";
+  // const BACKEND_API_URL = "https://fyp-backend-ws28.onrender.com/diagnose";
+  const BACKEND_API_URL = "https://fyp-flask-api-production.up.railway.app/diagnose";
+  
 
   const handleFileUpload = (file: File | null) => {
     setUploadedFile(file);
