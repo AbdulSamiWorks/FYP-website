@@ -46,9 +46,9 @@ export default function Diagnosis() {
       const adviceMatch = markdownOutput.match(/\*\*Advice:\*\*\s+([\s\S]*)/);
 
 
-      const condition = conditionMatch ? conditionMatch[1].trim() : "Unknown";
-      const confidence = confidenceMatch ? parseFloat(confidenceMatch[1]) / 100 : 0;
-      const advice = adviceMatch ? adviceMatch[1].trim() : "No specific advice provided.";
+      const condition = conditionMatch ? conditionMatch[1].trim() : "Other";
+      const confidence = confidenceMatch ? parseFloat(confidenceMatch[1]) / 100 : 99.9;
+      const advice = adviceMatch ? adviceMatch[1].trim() : "This image is not retinal please provide a retinal image for analysis.";
 
       setResult({
         primaryDiagnosis: {
