@@ -41,14 +41,18 @@ export default function Diagnosis() {
 
       const conditionMatch = markdownOutput.match(/\*\*Predicted Condition:\*\* (.+)/);
       const confidenceMatch = markdownOutput.match(/\*\*Confidence:\*\* ([\d.]+)%/);
+      const adviceMatch = markdownOutput.match(/\*\*Advice:\*\*\s+([\s\S]*)/);
+
 
       const condition = conditionMatch ? conditionMatch[1].trim() : "Unknown";
       const confidence = confidenceMatch ? parseFloat(confidenceMatch[1]) / 100 : 0;
+      const advice = adviceMatch ? adviceMatch[1].trim() : "No specific advice provided.";
 
       setResult({
         primaryDiagnosis: {
           condition,
           confidence,
+          advice,
         },
         markdown: markdownOutput,
         processingTime: 0,
@@ -179,6 +183,7 @@ export default function Diagnosis() {
                     disease: result.primaryDiagnosis.condition,
                     confidence: Math.round(result.primaryDiagnosis.confidence * 100),
                     accuracy: Math.round(result.primaryDiagnosis.confidence * 100),
+                    advice: result.primaryDiagnosis.advice,
                     processingTime: result.processingTime,
                   }
                 : null

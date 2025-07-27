@@ -10,6 +10,7 @@ interface DiagnosisResult {
   accuracy: number;
   processingTime: number;
   heatmapUrl?: string;
+  advice?: string; // ✅ Added advice field
 }
 
 interface DiagnosisResultsProps {
@@ -67,7 +68,9 @@ export default function DiagnosisResults({
                   {result.disease}
                 </span>
                 <span className="text-lg font-semibold text-[hsl(var(--success-green))]">
+                 
                   {result.confidence.toFixed(1)}%
+                  
                 </span>
               </div>
               <Progress value={result.confidence} className="h-2" />
@@ -81,7 +84,7 @@ export default function DiagnosisResults({
                 <p className="text-2xl font-bold text-[hsl(var(--medical-blue))]">
                   {result.accuracy.toFixed(1)}%
                 </p>
-                <p className="text-sm text-gray-600">Model Accuracy</p>
+                <p className="text-sm text-gray-600">Model confidence</p>
               </CardContent>
             </Card>
             <Card>
@@ -114,6 +117,18 @@ export default function DiagnosisResults({
                     <strong>Attention Areas:</strong> Highlighted regions show where the AI model focused during analysis.
                     Warmer colors (red/orange) indicate areas of highest diagnostic relevance.
                   </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* AI Medical Advice */}
+          {result.advice && (
+            <Card className="mb-6">
+              <CardContent className="p-6">
+                <h4 className="text-lg font-semibold mb-4">AI Medical Advice</h4>
+                <div className="text-sm text-gray-700 whitespace-pre-line">
+                  {result.advice}
                 </div>
               </CardContent>
             </Card>
