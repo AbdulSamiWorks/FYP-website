@@ -3,12 +3,12 @@ import { Link, useLocation } from "wouter";
 import { Button } from "../components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet";
 import { Badge } from "../components/ui/badge";
-import { 
-  Eye, 
-  BarChart3, 
-  BookOpen, 
-  Info, 
-  Menu, 
+import {
+  Eye,
+  BarChart3,
+  BookOpen,
+  Info,
+  Menu,
   X,
   Shield,
   Network,
@@ -20,6 +20,7 @@ import { MedicalIcons, AIProcessingIcon } from "../components/ui/icons";
 export default function ModernNav() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [badgeActive, setBadgeActive] = useState(false);
 
   const navigationItems = [
     {
@@ -92,8 +93,8 @@ export default function ModernNav() {
                     variant={active ? "default" : "ghost"}
                     className={`
                       relative h-12 px-4 rounded-xl transition-all duration-300 group
-                      ${active 
-                        ? "medical-gradient text-white medical-shadow-lg" 
+                      ${active
+                        ? "medical-gradient text-white medical-shadow-lg"
                         : "hover:bg-medical-primary/10 hover:text-medical-primary"
                       }
                     `}
@@ -101,11 +102,23 @@ export default function ModernNav() {
                     <item.icon className={`w-4 h-4 mr-2 ${active ? "text-white" : "text-medical-primary"}`} />
                     <span className="font-medium">{item.name}</span>
                     {item.badge && (
-                      <Badge className="ml-2 bg-medical-success text-white text-xs px-2 py-0 animate-pulse">
+                      <Badge
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setBadgeActive(!badgeActive);
+                        }}
+                        className={`
+                          ml-2 text-xs px-2 py-0 rounded-full transition-all duration-300 cursor-pointer border
+                          ${badgeActive
+                            ? "bg-blue-600 text-white border-blue-800 shadow-sm scale-105"
+                            : "bg-gray-800 text-white border-gray-500 opacity-80 hover:opacity-100"
+                          }
+                        `}
+                      >
                         {item.badge}
                       </Badge>
                     )}
-                    
+
                     {/* Hover tooltip */}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
                       {item.description}
@@ -169,8 +182,8 @@ export default function ModernNav() {
                           variant="ghost"
                           className={`
                             w-full justify-start h-auto p-4 rounded-xl transition-all duration-300
-                            ${active 
-                              ? "bg-medical-primary text-white medical-shadow" 
+                            ${active
+                              ? "bg-medical-primary text-white medical-shadow"
                               : "hover:bg-medical-primary/10 hover:text-medical-primary"
                             }
                           `}
@@ -205,7 +218,7 @@ export default function ModernNav() {
                     </span>
                   </div>
                   <Link href="/diagnosis">
-                    <Button 
+                    <Button
                       className="w-full medical-gradient hover:opacity-90 py-4 rounded-xl font-semibold medical-shadow-lg"
                       onClick={() => setIsOpen(false)}
                     >
