@@ -535,60 +535,77 @@ export default function FLDFLComparison() {
       </div>
 
       {/* Interactive Comparison */}
-      <Tabs defaultValue="comparison" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8">
-          <TabsTrigger value="comparison">Detailed Comparison</TabsTrigger>
-          <TabsTrigger value="diagrams">Visual Architecture</TabsTrigger>
-          <TabsTrigger value="benefits">Why DFL for Medical AI?</TabsTrigger>
-        </TabsList>
+<Tabs defaultValue="comparison" className="w-full">
+  {/* Scrollable Tab Bar */}
+  <div className="overflow-x-auto pb-2">
+    <TabsList className="inline-flex min-w-full justify-start gap-2 sm:justify-center">
+      <TabsTrigger
+        value="comparison"
+        className="whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium text-gray-700 bg-gray-100 data-[state=active]:bg-medical-primary data-[state=active]:text-white hover:bg-gray-200 transition"
+      >
+        Detailed Comparison
+      </TabsTrigger>
+      <TabsTrigger
+        value="diagrams"
+        className="whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium text-gray-700 bg-gray-100 data-[state=active]:bg-medical-primary data-[state=active]:text-white hover:bg-gray-200 transition"
+      >
+        Visual Architecture
+      </TabsTrigger>
+      <TabsTrigger
+        value="benefits"
+        className="whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium text-gray-700 bg-gray-100 data-[state=active]:bg-medical-primary data-[state=active]:text-white hover:bg-gray-200 transition"
+      >
+        Why DFL for Medical AI?
+      </TabsTrigger>
+    </TabsList>
+  </div>
 
-        <TabsContent value="comparison" className="space-y-6">
-          <div className="grid gap-6">
-            {comparisonData.map((item, index) => (
-              <Card key={item.aspect} className="medical-shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    <span className="text-xl text-medical-primary">{item.aspect}</span>
-                    <div className="flex gap-4">
-                      <div className="text-center">
-                        <div className="text-sm text-gray-500 mb-1">FL</div>
-                        <Badge className={getScoreColor(item.fl.score)}>
-                          {item.fl.score}/10
-                        </Badge>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-sm text-gray-500 mb-1">DFL</div>
-                        <Badge className={getScoreColor(item.dfl.score)}>
-                          {item.dfl.score}/10
-                        </Badge>
-                      </div>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                      <h4 className="font-semibold text-blue-800 mb-2 flex items-center gap-2">
-                        <Server className="w-4 h-4" />
-                        Federated Learning
-                      </h4>
-                      <p className="text-blue-700 mb-2">{item.fl.description}</p>
-                      <p className="text-sm text-blue-600">{item.fl.details}</p>
-                    </div>
-                    <div className="p-4 bg-medical-primary/10 rounded-lg border border-medical-primary/20">
-                      <h4 className="font-semibold text-medical-primary mb-2 flex items-center gap-2">
-                        <Network className="w-4 h-4" />
-                        Decentralized FL
-                      </h4>
-                      <p className="text-medical-primary mb-2">{item.dfl.description}</p>
-                      <p className="text-sm text-medical-primary/80">{item.dfl.details}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+  {/* Tab Content */}
+  <TabsContent value="comparison" className="space-y-6 mt-6">
+    {comparisonData.map((item, index) => (
+      <Card key={item.aspect} className="medical-shadow-lg">
+        <CardHeader>
+          <CardTitle className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
+            <span className="text-xl text-medical-primary font-semibold">{item.aspect}</span>
+            <div className="flex gap-4">
+              <div className="text-center">
+                <div className="text-sm text-gray-500 mb-1">FL</div>
+                <Badge className={getScoreColor(item.fl.score)}>{item.fl.score}/10</Badge>
+              </div>
+              <div className="text-center">
+                <div className="text-sm text-gray-500 mb-1">DFL</div>
+                <Badge className={getScoreColor(item.dfl.score)}>{item.dfl.score}/10</Badge>
+              </div>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+            {/* FL Box */}
+            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <h4 className="font-semibold text-blue-800 mb-2 flex items-center gap-2">
+                <Server className="w-4 h-4" />
+                Federated Learning
+              </h4>
+              <p className="text-blue-700 mb-2">{item.fl.description}</p>
+              <p className="text-sm text-blue-600">{item.fl.details}</p>
+            </div>
+
+            {/* DFL Box */}
+            <div className="p-4 bg-medical-primary/10 rounded-lg border border-medical-primary/20">
+              <h4 className="font-semibold text-medical-primary mb-2 flex items-center gap-2">
+                <Network className="w-4 h-4" />
+                Decentralized FL
+              </h4>
+              <p className="text-medical-primary mb-2">{item.dfl.description}</p>
+              <p className="text-sm text-medical-primary/80">{item.dfl.details}</p>
+            </div>
           </div>
-        </TabsContent>
+        </CardContent>
+      </Card>
+    ))}
+  </TabsContent>
+
 
         <TabsContent value="diagrams" className="space-y-8">
           <div className="grid lg:grid-cols-2 gap-8">
